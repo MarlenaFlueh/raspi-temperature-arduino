@@ -1,0 +1,23 @@
+{
+  "name": "raspi-temperature-arduino",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarlenaFlueh/raspi-temperature-arduino.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarlenaFlueh/raspi-temperature-arduino/issues"
+  },
+  "homepage": "https://github.com/MarlenaFlueh/raspi-temperature-arduino#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "serialport": "^7.0.2"
+  }
+}

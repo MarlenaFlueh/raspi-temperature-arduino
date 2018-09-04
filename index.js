@@ -1,6 +1,7 @@
 const serialport = require("serialport");
+const axios = require("axios");
 
-const url = "http://localhost:5000/temperatures";
+const url = "http://192.168.2.65:5000/temperatures";
 console.log("starts");
 
 const port = new serialport("/dev/ttyACM0", {
@@ -11,31 +12,26 @@ const Readline = serialport.parsers.Readline;
 const parser = new Readline();
 port.pipe(parser);
 
-port.on("open", onPortOpen);
-parser.on("data", addData);
-port.on("close", onClose);
-port.on("error", onError);
-
 function onPortOpen() {
   console.log("port open");
 }
 
 const addData = async temperature => {
   console.log("data received: " + temperature);
-  try {
-    await fetch(url, {
-      method: "POST",
-      body: JSON.stringify({ temp: temperature })
-    });
-  } catch (err) {
-    console.log(err);
-  }
+  axios.post(url, {
+    temp: temperature
+  });
 };
 
 const onClose = () => {
   console.log("port closed");
 };
 
-const onError = () => {
-  console.log("error");
+const onError = error => {
+  console.log("error:", error);
 };
+
+port.on("open", onPortOpen);
+parser.on("data", addData);
+port.on("close", onClose);
+port.on("error", onError);
